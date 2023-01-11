@@ -62,13 +62,11 @@ function fromPrivateKey(buffer, options) {
   typeforce(types.Buffer256bit, buffer);
   if (!ecc.isPrivate(buffer))
     throw new TypeError('Private key not in range [1, n)');
-  typeforce(isOptions, options);
   return new ECPair(buffer, undefined, options);
 }
 exports.fromPrivateKey = fromPrivateKey;
 function fromPublicKey(buffer, options) {
   typeforce(ecc.isPoint, buffer);
-  typeforce(isOptions, options);
   return new ECPair(undefined, buffer, options);
 }
 exports.fromPublicKey = fromPublicKey;
@@ -95,7 +93,6 @@ function fromWIF(wifString, network) {
 }
 exports.fromWIF = fromWIF;
 function makeRandom(options) {
-  typeforce(isOptions, options);
   if (options === undefined) options = {};
   const rng = options.rng || randomBytes;
   let d;
